@@ -11,7 +11,7 @@ GRUPO 2 - BETTER THAN SPOTIFY
 <li>React</li>
 <li>Ionic</li>
 <li>NestJS</li>
-<li>Boostrap</li>
+<li>Bootstrap</li>
 </ul>
 
 ## Entrega:
