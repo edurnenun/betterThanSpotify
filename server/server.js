@@ -2,17 +2,19 @@ require('dotenv');
 
 const express = require('express');
 const SpotifyWebApi = require('spotify-web-api-node');
-const http=require('http')
+const http = require('http');
 const app = express();
 
-app.get('/login', (req, res) =>{
-    res.redirect('https://accounts.spotify.com/authorize?client_id=ee2f9df1177b4f1ab271c635c6bf1219&response_type=code&redirect_uri=http://localhost:8100& scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state')
-})
+app.get('/login', (req, res) => {
+  res.redirect(
+    'https://accounts.spotify.com/authorize?client_id=ee2f9df1177b4f1ab271c635c6bf1219&response_type=code&redirect_uri=http://localhost:8100& scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state',
+  );
+});
 
 app.post('/code', (req, res) => {
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: 'http://localhost:3001',
+    redirectUri: 'http://localhost:8100',
     clientId: 'ee2f9df1177b4f1ab271c635c6bf1219',
     clientSecret: ' eae6a687fcce4d87b42c50399b924ba8',
   });
@@ -34,6 +36,6 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 3001;
 
-server.listen(PORT,()=>{
-    console.log(`listening on ${PORT}`);
-})
+server.listen(PORT, () => {
+  console.log(`listening on ${PORT}`);
+});
