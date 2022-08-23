@@ -3,11 +3,7 @@ import './Home.css';
 import Login from "../Components/Login";
 import Dashboard from '../Components/Dashboard'
 
-const code = new URLSearchParams(window.location.search).get('code')
-
-function App(){
-  return code ? <Dashboard code={code} /> : <Login />
-}
+const code = new URLSearchParams(window.location.search).get('code') ?? undefined
 
 const Home: React.FC = () => {
   return (
@@ -23,7 +19,7 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Login></Login>
+        code ? <Dashboard code={code} /> : <Login />
       </IonContent>
     </IonPage>
   );
