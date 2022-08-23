@@ -4,9 +4,7 @@ import useAuth from './useAuth';
 import SpotifyWebApi from 'spotify-web-api-node';
 import TrackSearchResults from './TrackSearchResult';
 
-const spotifyWebApi = new SpotifyWebApi({
-  clientId:'ee2f9df1177b4f1ab271c635c6bf1219',
-})
+const spotifyWebApi = new SpotifyWebApi({clientId: 'ee2f9df1177b4f1ab271c635c6bf1219',})
 
 interface ContainerProps {code?:string }
 interface SearchbarChangeEventDetail {
@@ -17,19 +15,21 @@ const Dashboard: React.FC<ContainerProps> =  ({code}) => {
   const accessToken = useAuth(code);
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState<any>([]);
-  
 
   useEffect(() => {
-    if(!accessToken) return
+    if (!accessToken) return
     spotifyWebApi.setAccessToken(accessToken)
   }, [accessToken])
 
   useEffect(() => {
     if (!search) return setSearchResults([])
     if (!accessToken) return
+    console.dir({accessToken, search})
+    spotifyWebApi.setAccessToken(accessToken)
 
     let cancel =false
     spotifyWebApi.searchTracks(search).then(res => {
+      console.dir({data:res.body.tracks})
       if (cancel) return
       setSearchResults(res.body.tracks?.items.map(track => {
         const smallestAlbumImage = track.album.images.reduce((smallest, image) => {
@@ -44,11 +44,13 @@ const Dashboard: React.FC<ContainerProps> =  ({code}) => {
           albumUrl: smallestAlbumImage.url
         }
       }))
+    }).catch((err) => {
+      console.dir({ohno:err})
     })
-    cancel = true
+    return (() => (cancel = true)) as any
   }, [search, accessToken])
 
-  return <IonContent>{code}<p>Searchbar with a placeholder</p>
+  return <IonContent>
   
   <IonSearchbar value={search} onIonChange={e => setSearch(e.target.value!)} placeholder="Search songs/artist"></IonSearchbar>
   <IonContent>{searchResults.map((track:any) => (

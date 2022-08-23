@@ -15,6 +15,7 @@ export default function useAuth(code: any){
             code,
         })
         .then(res => {
+            console.dir({codeData: res.data})
             setAccessToken(res.data.accessToken)
             setRefreshToken(res.data.refreshToken)
             setExpiresIn(res.data.expiresIn)
@@ -34,6 +35,7 @@ export default function useAuth(code: any){
             refreshToken,
             })
             .then(res => {
+                console.dir({refreshData:res.data})
             setAccessToken(res.data.accessToken)
             setExpiresIn(res.data.expiresIn)        
             })

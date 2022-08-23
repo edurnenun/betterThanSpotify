@@ -5,13 +5,12 @@ import Dashboard from '../Components/Dashboard'
 
 const code = new URLSearchParams(window.location.search).get('code') ?? undefined
 
+console.dir({code})
+
 const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
@@ -19,7 +18,7 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        code ? <Dashboard code={code} /> : <Login />
+            {code ? <Dashboard code={code} /> : <Login />}
       </IonContent>
     </IonPage>
   );
