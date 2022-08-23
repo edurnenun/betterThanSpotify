@@ -24,6 +24,21 @@ export default function useAuth(code: any){
     }, [code])
 
     useEffect(()=>{
+        axios.post('http://localhost:3001/refresh',{
+            refreshToken,
+        })
+        .then(res => {
+            /*
+            setAccessToken(res.data.accessToken)
+            setRefreshToken(res.data.refreshToken)
+            setExpiresIn(res.data.expiresIn)
+            window.history.pushState({},null!, '/')
+            */
+        })
+        .catch(()=>{
+            const win: Window = window;
+            win.location = "/"
+        })
 
     }, [refreshToken, expiresIn])
 

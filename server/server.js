@@ -3,10 +3,31 @@ import express from 'express';
 import SpotifyWebApi from 'spotify-web-api-node';
 import http from 'http';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
+
+app.post('/refresh', (req, res) => {
+  const refreshToken = req.body.refreshToken;
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: 'http://localhost:8100',
+    clientId: 'ee2f9df1177b4f1ab271c635c6bf1219',
+    clientSecret: ' eae6a687fcce4d87b42c50399b924ba8',
+    refreshToken,
+  });
+});
+
+spotifyApi
+  .refreshAccessToken()
+  .then((data) => {
+    console.log(data.body);
+  })
+  .catch(() => {
+    res.sendStatuts(400);
+  });
 
 app.get('/login', (req, res) => {
   res.redirect(
@@ -30,7 +51,8 @@ app.post('/code', (req, res) => {
         expiresIn: data.body.expires_in,
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatuts(400);
     });
 });
