@@ -1,12 +1,14 @@
 import { IonContent } from '@ionic/react';
+import useAuth from './useAuth';
 
 interface ContainerProps {code?:string }
 
-const ExploreContainer: React.FC<ContainerProps> =  ({code}) => (
-    <IonContent>
-      {code}
-    </IonContent>
+const Dashboard: React.FC<ContainerProps> =  ({code}) => {
+  const accessToken = useAuth(code)
+  return <IonContent>{code}</IonContent>
 
-);
+}
 
-export default ExploreContainer;
+export default Dashboard;
+
+

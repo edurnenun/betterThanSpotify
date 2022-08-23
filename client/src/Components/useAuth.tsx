@@ -11,6 +11,9 @@ export default function useAuth(code){
         axios.post('http://localhost:3001/code',{
             code,
         })
+        .then(res => {
+            console.log(res.data)
+        })
     }, [code])
 
 }

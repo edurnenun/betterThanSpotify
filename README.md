@@ -11,7 +11,6 @@ GRUPO 2 - BETTER THAN SPOTIFY
 <li>React</li>
 <li>Ionic</li>
 <li>NestJS</li>
-<li>Bootstrap</li>
 </ul>
 
 ## Entrega:
@@ -26,7 +25,7 @@ GRUPO 2 - BETTER THAN SPOTIFY
 
 - npm install
 
-Para poder visualizar el proyecto basta con poner en el terminal el comando npm i. 
+Para poder visualizar el proyecto basta con poner en el terminal el comando ionic serve o npm start. 
 Para poder correr los test usar npm run test.
 
 ## ✒️ Personas autoras
@@ -34,3 +33,4 @@ Para poder correr los test usar npm run test.
   <li>Edurne Martínez</li>
   <li>Belén del Tovar</li>
 </ul>
+

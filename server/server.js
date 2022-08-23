@@ -1,9 +1,12 @@
 require('dotenv');
+import express from 'express';
+import SpotifyWebApi from 'spotify-web-api-node';
+import http from 'http';
+import cors from 'cors';
 
-const express = require('express');
-const SpotifyWebApi = require('spotify-web-api-node');
-const http = require('http');
 const app = express();
+
+app.use(cors());
 
 app.get('/login', (req, res) => {
   res.redirect(
@@ -39,3 +42,5 @@ const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 });
+
+app.listen(3001); //hardcode
