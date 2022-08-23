@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv');
-import express from 'express';
-import SpotifyWebApi from 'spotify-web-api-node';
-import http from 'http';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+const express = require('express');
+const SpotifyWebApi = require('spotify-web-api-node');
+const http = require('http');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -18,21 +19,20 @@ app.post('/refresh', (req, res) => {
     clientSecret: ' eae6a687fcce4d87b42c50399b924ba8',
     refreshToken,
   });
-});
 
-spotifyApi
-  .refreshAccessToken()
-  .then((data) => {
-    res.json({
-      accessToken: data.body.accessToken,
-      expiresIn: data.body.expiresIn,
+  spotifyApi
+    .refreshAccessToken()
+    .then((data) => {
+      res.json({
+        accessToken: data.body.accessToken,
+        expiresIn: data.body.expiresIn,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
     });
-  })
-  .catch((err) => {
-    console.log(err);
-    res.sendStatuts(400);
-  });
-
+});
 app.get('/login', (req, res) => {
   res.redirect(
     'https://accounts.spotify.com/authorize?client_id=ee2f9df1177b4f1ab271c635c6bf1219&response_type=code&redirect_uri=http://localhost:8100& scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state',
@@ -41,6 +41,8 @@ app.get('/login', (req, res) => {
 
 app.post('/code', (req, res) => {
   const code = req.body.code;
+  console.dir(req.body);
+
   const spotifyApi = new SpotifyWebApi({
     redirectUri: 'http://localhost:8100',
     clientId: 'ee2f9df1177b4f1ab271c635c6bf1219',
@@ -57,7 +59,7 @@ app.post('/code', (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.sendStatuts(400);
+      res.sendStatus(400);
     });
 });
 
@@ -68,5 +70,3 @@ const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 });
-
-app.listen(3001); //hardcode

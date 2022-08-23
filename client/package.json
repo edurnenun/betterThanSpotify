@@ -71,7 +71,8 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "4.0.1"
+    "@capacitor/cli": "4.0.1",
+    "@types/spotify-web-api-node": "^5.0.7"
   },
   "description": "An Ionic project"
 }
