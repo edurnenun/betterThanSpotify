@@ -25,11 +25,11 @@ spotifyApi
   .then((data) => {
     res.json({
       accessToken: data.body.accessToken,
-      expiresIn: data.body.expiresIn
-    })
+      expiresIn: data.body.expiresIn,
+    });
   })
   .catch((err) => {
-    console.log(err)
+    console.log(err);
     res.sendStatuts(400);
   });
 
