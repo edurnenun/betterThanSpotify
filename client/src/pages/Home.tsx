@@ -1,30 +1,34 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItemDivider } from '@ionic/react';
-import './Home.css';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonItemDivider,
+} from "@ionic/react";
+import "./Home.css";
 import Login from "../Components/Login";
-import Dashboard from '../Components/Dashboard'
-import Player from '../Components/Player'
+import Dashboard from "../Components/Dashboard";
+import Player from "../Components/Player";
 
-const code = new URLSearchParams(window.location.search).get('code') ?? undefined
+const code =
+  new URLSearchParams(window.location.search).get("code") ?? undefined;
 
-console.dir({code})
+console.dir({ code });
 
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-      </IonHeader>
+      <IonHeader></IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonItemDivider>
-        {code ? <Dashboard code={code} /> : <Login />}
-        </IonItemDivider>
-        <IonItemDivider>
-          <Player></Player>
-        </IonItemDivider>
+        <IonContent>
+          {code ? <Dashboard code={code} /> : <Login />}
+        </IonContent>
       </IonContent>
     </IonPage>
   );

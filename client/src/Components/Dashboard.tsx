@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { IonContent, IonSearchbar } from '@ionic/react';
+import { IonContent, IonSearchbar, IonItemDivider } from '@ionic/react';
 import useAuth from './useAuth';
 import SpotifyWebApi from 'spotify-web-api-node';
 import TrackSearchResults from './TrackSearchResult';
 import Player from '../Components/Player';
+import axios from 'axios';
 
 const spotifyWebApi = new SpotifyWebApi({clientId: 'ee2f9df1177b4f1ab271c635c6bf1219',})
 
@@ -17,11 +18,26 @@ const Dashboard: React.FC<ContainerProps> =  ({code}) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState<any>([]);
   const [playingTrack, setplayingTrack] = useState<any>();
+  const [lyrics, setLyrics] = useState('');
 
   function chooseTrack(track: any){
     setplayingTrack(track)
     setSearch('')
+    setLyrics('')
   }
+
+  useEffect(() => {
+    if (!playingTrack) return
+
+    axios.get('http://localhost:3001/lyrics', {
+      params: {
+        track: playingTrack.title,
+        artist: playingTrack.artist
+      }
+    } ).then(res => {
+      setLyrics(res.data.lyrics)
+    })
+  }, [playingTrack] )
 
   useEffect(() => {
     if (!accessToken) return
@@ -56,12 +72,18 @@ const Dashboard: React.FC<ContainerProps> =  ({code}) => {
     return (() => (cancel = true)) as any
   }, [search, accessToken])
 
-  return <IonContent>
+  return <IonContent style={{zIndex:4}} >
   <IonSearchbar value={search} onIonChange={e => setSearch(e.target.value!)} placeholder="Search songs/artist"></IonSearchbar>
     <IonContent>
       {searchResults.map((track:any) => (
-    <TrackSearchResults track={track} key={track.uri} chooseTrack={chooseTrack} ></TrackSearchResults>
+    <TrackSearchResults 
+      track={track} 
+      key={track.uri} 
+      chooseTrack={chooseTrack} ></TrackSearchResults>
      ))}
+     {searchResults.lenght === 0 && (
+        <IonItemDivider style={{ whiteSpace: 'pre'}}>{lyrics}</IonItemDivider>
+     )}
     </IonContent>
     <IonContent>
       <Player accessToken={accessToken} trackUri={playingTrack?.uri} ></Player>

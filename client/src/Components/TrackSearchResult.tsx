@@ -3,6 +3,7 @@ import { IonContent, IonImg, IonItemDivider } from '@ionic/react';
 
 export default function TrackSearchResults({track, chooseTrack}:any) {
     function handlePlay(){
+        console.dir(track)
         chooseTrack(track)
     }
     return (
