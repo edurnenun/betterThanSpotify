@@ -1,10 +1,15 @@
 import './Login.css';
-import { IonButton, IonContent } from '@ionic/react';
+import { IonButton, IonContent, IonGrid, IonRow } from '@ionic/react';
 
 export default function LoginBtnContainer() { 
     return (
         <IonContent>
-        <IonButton href={'http://localhost:3001/login'} color="success" size="large">Login with Spotify</IonButton>
+            <IonGrid>
+                <IonRow class="ion-justify-content-center ion-align-items-center">
+                <IonButton href={'http://localhost:3001/login'} color="success" size="large" className="login-button">Login with Spotify</IonButton>
+                </IonRow>
+            </IonGrid>
+        
     </IonContent>
     )
 }

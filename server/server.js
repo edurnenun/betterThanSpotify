@@ -4,13 +4,13 @@ const express = require('express');
 const SpotifyWebApi = require('spotify-web-api-node');
 const http = require('http');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const lyricsFinder = require('lyrics-finder');
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.post('/refresh', (req, res) => {
   const refreshToken = req.body.refreshToken;
@@ -36,7 +36,7 @@ app.post('/refresh', (req, res) => {
 });
 app.get('/login', (req, res) => {
   res.redirect(
-    'https://accounts.spotify.com/authorize?client_id=ee2f9df1177b4f1ab271c635c6bf1219&response_type=code&redirect_uri=http://localhost:8100& scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state',
+    'https://accounts.spotify.com/authorize?client_id=ee2f9df1177b4f1ab271c635c6bf1219&response_type=code&redirect_uri=http://localhost:8100& scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-stat',
   );
 });
 

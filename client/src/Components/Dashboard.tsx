@@ -9,9 +9,6 @@ import axios from 'axios';
 const spotifyWebApi = new SpotifyWebApi({clientId: 'ee2f9df1177b4f1ab271c635c6bf1219',})
 
 interface ContainerProps {code?:string }
-interface SearchbarChangeEventDetail {
-  value?: string;
-}
 
 const Dashboard: React.FC<ContainerProps> =  ({code}) => {
   const accessToken = useAuth(code);
@@ -47,9 +44,10 @@ const Dashboard: React.FC<ContainerProps> =  ({code}) => {
   useEffect(() => {
     if (!search) return setSearchResults([])
     if (!accessToken) return
-    spotifyWebApi.setAccessToken(accessToken)
 
     let cancel =false
+    spotifyWebApi.setAccessToken(accessToken)
+
     spotifyWebApi.searchTracks(search).then(res => {
       console.dir({data:res.body.tracks})
       if (cancel) return
@@ -73,7 +71,7 @@ const Dashboard: React.FC<ContainerProps> =  ({code}) => {
   }, [search, accessToken])
 
   return <IonContent style={{zIndex:4}} >
-  <IonSearchbar value={search} onIonChange={e => setSearch(e.target.value!)} placeholder="Search songs/artist"></IonSearchbar>
+  <IonSearchbar value={search} onIonChange={e => setSearch(e.detail.value!)} placeholder="Search songs/artist"></IonSearchbar>
     <IonContent>
       {searchResults.map((track:any) => (
     <TrackSearchResults 
