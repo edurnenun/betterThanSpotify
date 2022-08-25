@@ -7,15 +7,7 @@ export default function TrackSearchResults({track, chooseTrack}:any) {
         chooseTrack(track)
     }
     return (
-        <IonContent onClick={handlePlay} style={{
-            //revisar estilo
-            width: "50%",
-            minWidth: "17.5rem",alignItems: "center",
-            marginTop: "0.6rem",
-            marginLeft: "auto",
-            marginRight: "auto",
-            padding: "0.3rem",
-            boxShadow: "0px 0px 4px #2a213f",}}>
+        <IonContent onClick={handlePlay} class="ion-justify-content-center ion-align-items-center">
             <IonImg src={track.albumUrl} style={{ height: "64px", width: "64px", borderRadius: "50px",
             marginRight: "0.5rem"}} alt="Artist image"/>
            <IonItemDivider>{track.title} </IonItemDivider> 
