@@ -6,7 +6,7 @@ export default function LoginBtnContainer() {
         <IonContent>
             <IonGrid>
                 <IonRow class="ion-justify-content-center ion-align-items-center">
-                <IonButton href={'http://localhost:3001/login'} color="success" size="large" className="login-button">Login with Spotify</IonButton>
+                <IonButton href={'https://betterthanspotify.herokuapp.com/login'} color="success" size="large" className="login-button">Login with Spotify</IonButton>
                 </IonRow>
             </IonGrid>
         
