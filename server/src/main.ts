@@ -1,17 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-
-const express = require('express');
-const spotifyWebApi = require('spotify-web-api-node');
-
-const app = express();
-
-/*
+import 'dotenv/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api/v1');
+  const app = await NestFactory.create(AppModule, { cors: true });
+
   await app.listen(3001);
 }
+
 bootstrap();
-*/
