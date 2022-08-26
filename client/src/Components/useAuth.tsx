@@ -9,7 +9,7 @@ export default function useAuth(code: any) {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/code", {
+      .post("https://betterthanspotify.herokuapp.com/code", {
         code,
       })
       .then((res) => {
@@ -28,7 +28,7 @@ export default function useAuth(code: any) {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3001/refresh", {
+        .post("https://betterthanspotify.herokuapp.com/refresh", {
           refreshToken,
         })
         .then((res) => {

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { LyricsService } from './lyrics.service';
 
 @Controller('lyrics')
@@ -6,7 +6,7 @@ export class LyricsController {
   constructor(private lyricsService: LyricsService) {}
 
   @Get()
-  findAll() {
-    return this.lyricsService.findAll();
+  findLyric(@Query('artist') artist, @Query('track') track) {
+    return this.lyricsService.findLyric(artist, track);
   }
 }
