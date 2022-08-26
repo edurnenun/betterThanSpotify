@@ -16,12 +16,11 @@ GRUPO 2 - BETTER THAN SPOTIFY
 ## Entrega:
 <ul>
 <li>Link a un repositorio de github.<a href="https://github.com/edurnenun/betterThanSpotify.git">ENLACE</a></li>
-<li>Fichero ejecutable .apk</li>
-<li>Url del backend en el servidor heroku<a href="">ENLACE</a></li>
+<li>Url del backend en el servidor heroku<a href="https://betterthanspotify.herokuapp.com/">ENLACE</a></li>
 <li>Link al Kanban del proyecto <a href="https://trello.com/b/ubEezQz2/better-than-spotify">ENLACE</a></li></li>
 </ul>
 
-## Install
+## Install y start (arranque)
 
 - npm install
 
